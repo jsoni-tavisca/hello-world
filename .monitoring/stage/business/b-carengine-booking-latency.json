@@ -1,0 +1,33 @@
+{
+  "friendlyName": "Booking Latency",
+  "threshold": {
+    "condition": "gte",
+    "value": 20000
+  },
+  "applicationName": "Car Engine",
+  "environment": "stage",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND category:book_actor AND tid:hc8mbjncw0",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "percentile",
+      "field": "duration_ms",
+      "percentile": 95
+    }
+  },
+  "notifications": {
+    "onError": [
+      {
+        "type": "teams_message",
+        "template": "business_latency_failure"
+      }
+    ],
+    "onRecovery": [
+      {
+        "type": "teams_message",
+        "template": "business_latency_recovery"
+      }
+    ]
+  }
+}
