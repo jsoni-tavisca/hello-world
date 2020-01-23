@@ -1,0 +1,17 @@
+{
+  "threshold": {
+    "condition": "gte",
+    "value": 20
+  },
+  "applicationName": "Car Engine",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND category:search_actor AND status:failure AND tid:hc8mbjncw0",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "count",
+      "field": "*",
+      "percentile": 0
+    }
+  }
+}
