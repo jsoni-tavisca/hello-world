@@ -1,0 +1,32 @@
+{
+  "friendlyName": "Vendor Content Latency",
+  "threshold": {
+    "condition": "gte",
+    "value": 300
+  },
+  "applicationName": "Car Engine",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND api:content AND verb:get_content_by_vendorcodes AND tid:hc8mbjncw0",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "percentile",
+      "field": "time_taken_ms",
+      "percentile": 95
+    }
+  },
+  "notifications": {
+    "onError": [
+      {
+        "type": "teams_message",
+        "template": "business_latency_failure"
+      }
+    ],
+    "onRecovery": [
+      {
+        "type": "teams_message",
+        "template": "business_latency_recovery"
+      }
+    ]
+  }
+}
