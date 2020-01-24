@@ -1,0 +1,32 @@
+{
+  "friendlyName": "Booking Failure",
+  "threshold": {
+    "condition": "gte",
+    "value": 1
+  },
+  "applicationName": "Car Engine",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND category:book_actor AND status:failure AND tid:hc8mbjncw0",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "count",
+      "field": "*",
+      "percentile": 0
+    }
+  },
+  "notifications": {
+    "onError": [
+      {
+        "type": "twilio_call",
+        "message": "Booking failure at oski Stage"
+      }
+    ],
+    "onRecovery": [
+      {
+        "type": "teams_message",
+        "template": "failed_calls_recovery"
+      }
+    ]
+  }
+}
