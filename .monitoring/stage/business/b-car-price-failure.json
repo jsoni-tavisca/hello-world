@@ -1,0 +1,32 @@
+{
+  "friendlyName": "Price Failures",
+  "threshold": {
+    "condition": "gte",
+    "value": 20
+  },
+  "applicationName": "Car Engine",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND verb:price AND api:price AND status:failure AND tid:hc8mbjncw0 AND tid:hc8mbjncw0",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "count",
+      "field": "*",
+      "percentile": 0
+    }
+  },
+  "notifications": {
+    "onError": [
+      {
+        "type": "teams_message",
+        "template": "failed_calls_failure"
+      }
+    ],
+    "onRecovery": [
+      {
+        "type": "teams_message",
+        "template": "failed_calls_recovery"
+      }
+    ]
+  }
+}
