@@ -1,0 +1,18 @@
+{
+  "description": "added from postman",
+  "threshold": {
+    "condition": "lte",
+    "value": 10
+  },
+  "applicationName": "car engine",
+  "queryConfiguration": {
+    "query": "app_name:car_engine AND type:exception",
+    "index": "logs-*",
+    "windowInSeconds": 300,
+    "aggregate": {
+      "type": "percentile",
+      "field": "log-*",
+      "percentile": 95
+    }
+  }
+}
